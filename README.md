@@ -1,16 +1,12 @@
 Docker-Ansible base images
 ===================
 
-[![Circle CI](https://circleci.com/gh/William-Yeh/docker-ansible.svg?style=shield)](https://circleci.com/gh/William-Yeh/docker-ansible) [![Build Status](https://travis-ci.org/William-Yeh/docker-ansible.svg?branch=master)](https://travis-ci.org/William-Yeh/docker-ansible)
-
 
 ## Summary
 
-Repository name in Docker Hub: **[williamyeh/ansible](https://hub.docker.com/r/williamyeh/ansible/)**
+Originally cloned from **[William-Yeh/docker-ansible](https://github.com/William-Yeh/docker-ansible)**
 
 This repository contains Dockerized [Ansible](https://github.com/ansible/ansible), published to the public [Docker Hub](https://hub.docker.com/) via **automated build** mechanism.
-
-
 
 ## Configuration
 
@@ -18,18 +14,13 @@ These are Docker images for [Ansible](https://github.com/ansible/ansible) softwa
 
 ### Base OS
 
-Debian (stretch, jessie), Ubuntu (xenial, trusty), CentOS (7), Alpine (3).
-
-Supports for Wheezy, Precise, and CentOS6 have been ended since Sep 2017.
+Ubuntu (xenial, trusty)
 
 ### Ansible
 
-Four versions are provided:
+One version is provided:
 
-  1. provides the most recent *stable* version of Ansible; suitable for most people.
-  2. same as stable version, but is designed for building (near-)*minimal* images out of playbooks; i.e., the Ansible body will be removed when mission completed. Refer to “[Build Docker images with Ansible: A half-blood approach](https://github.com/William-Yeh/build-docker-with-ansible)” for working examples and slides.
-  3. provides the old 1.9 version of Ansible (but will be retired someday).
-  4. provides the *experimental* version of Ansible; i.e., the master branch of official [Ansible's git repo](https://github.com/ansible/ansible).
+  1. provides version 2.3.1.0 of Ansible
 
 Each version is further divided into two variants:
 
@@ -39,73 +30,17 @@ Each version is further divided into two variants:
 
 ## Images and tags
 
-### Stable version (installed from official PyPI repo):
+### Official Ansible Version 2.3.1.0
 
 - Normal variants:
 
-  - `williamyeh/ansible:debian9`
-  - `williamyeh/ansible:debian8`
-  - `williamyeh/ansible:ubuntu16.04`
-  - `williamyeh/ansible:ubuntu14.04`
-  - `williamyeh/ansible:centos7`
-  - `williamyeh/ansible:alpine3`
+  - `mspanakis/ansible:ubuntu16.04`
+  - `mspanakis/ansible:ubuntu14.04`
 
 - Onbuild variants (*recommended for common cases*):
 
-  - `williamyeh/ansible:debian9-onbuild`
-  - `williamyeh/ansible:debian8-onbuild`
-  - `williamyeh/ansible:ubuntu16.04-onbuild`
-  - `williamyeh/ansible:ubuntu14.04-onbuild`
-  - `williamyeh/ansible:centos7-onbuild`
-  - `williamyeh/ansible:alpine3-onbuild`
-
-
-### Minimal configuration (the Ansible body will be removed when mission completed):
-
-Refer to “[Build Docker images with Ansible: A half-blood approach](https://github.com/William-Yeh/build-docker-with-ansible)” for working examples and slides.
-
-- Onbuild variants:
-
-  - `williamyeh/ansible:mini-alpine3`
-  - `williamyeh/ansible:mini-debian9`
-  - `williamyeh/ansible:mini-debian8`
-
-
-### Old 1.9 version (will be retired someday):
-
-Note: Ansible 1.9 was not supported in CentOS EPEL since January 2017, according to [this announcement](http://www.spinics.net/linux/fedora/epel-devel/msg00792.html).
-
-- Normal variants:
-
-  - `williamyeh/ansible:1.9-debian8`
-  - `williamyeh/ansible:1.9-ubuntu14.04`
-  - `williamyeh/ansible:1.9-alpine3`
-
-- Onbuild variants (*recommended for common cases*):
-
-  - `williamyeh/ansible:1.9-debian8-onbuild`
-  - `williamyeh/ansible:1.9-ubuntu14.04-onbuild`
-  - `williamyeh/ansible:1.9-alpine3-onbuild`
-
-
-### Experimental version (building directly from the git `master` source tree; use at your own risk!):
-
-- Normal variants:
-
-  - `williamyeh/ansible:master-debian9`
-  - `williamyeh/ansible:master-debian8`
-  - `williamyeh/ansible:master-ubuntu16.04`
-  - `williamyeh/ansible:master-ubuntu14.04`
-  - `williamyeh/ansible:master-centos7`
-
-- Onbuild variants (*recommended for common cases*):
-
-  - `williamyeh/ansible:master-debian9-onbuild`
-  - `williamyeh/ansible:master-debian8-onbuild`
-  - `williamyeh/ansible:master-ubuntu16.04-onbuild`
-  - `williamyeh/ansible:master-ubuntu14.04-onbuild`
-  - `williamyeh/ansible:master-centos7-onbuild`
-
+  - `mspanakis/ansible:ubuntu16.04-onbuild`
+  - `mspanakis/ansible:ubuntu14.04-onbuild`
 
 
 ## For the impatient
@@ -155,24 +90,6 @@ Therefore, I built these Docker images on my own.
 
 **NOTE:** [`ansible/ansible-docker-base`](https://github.com/ansible/ansible-docker-base) announced in September 2015: “Ansible no longer maintains images in Dockerhub directly.”
 
-### Comparison: image size
-
-```
-REPOSITORY                    TAG                   VIRTUAL SIZE
----------------------------   -------------------   ------------
-ansible/centos7-ansible       stable                367.5 MB
-ansible/ubuntu14.04-ansible   stable                286.6 MB
-
-williamyeh/ansible            alpine3-onbuild        66.4 MB
-williamyeh/ansible            centos6-onbuild       264.2 MB
-williamyeh/ansible            centos7-onbuild       275.3 MB
-williamyeh/ansible            debian7-onbuild       134.4 MB
-williamyeh/ansible            debian8-onbuild       178.3 MB
-williamyeh/ansible            ubuntu12.04-onbuild   181.9 MB
-williamyeh/ansible            ubuntu14.04-onbuild   238.3 MB
-```
-
-
 ## Usage
 
 Used mostly as a *base image* for configuring other software stack on some specified Linux distribution(s).
@@ -187,11 +104,6 @@ Vagrant.configure(2) do |config|
     # ==> Choose a Vagrant box to emulate Linux distribution...
     config.vm.box = "ubuntu/xenial64"
     #config.vm.box = "ubuntu/trusty64"
-    #config.vm.box = "debian/stretch64"
-    #config.vm.box = "debian/jessie64"
-    #config.vm.box = "bento/centos-7.2"
-    #config.vm.box = "maier/alpine-3.3.1-x86_64"
-
 
     # ==> Executing Ansible...
     config.vm.provision "ansible" do |ansible|
@@ -213,10 +125,6 @@ Docker to be a rescue. Now, with these **williamyeh/ansible** series, we may tes
 # ==> Choose a base image to emulate Linux distribution...
 FROM williamyeh/ansible:ubuntu16.04
 #FROM williamyeh/ansible:ubuntu14.04
-#FROM williamyeh/ansible:debian9
-#FROM williamyeh/ansible:debian8
-#FROM williamyeh/ansible:centos7
-#FROM williamyeh/ansible:alpine3
 
 
 # ==> Copying Ansible playbook...
@@ -239,10 +147,6 @@ You may also work with `onbuild` variants, which take care of many routine steps
 # ==> Choose a base image to emulate Linux distribution...
 FROM williamyeh/ansible:ubuntu16.04-onbuild
 #FROM williamyeh/ansible:ubuntu14.04-onbuild
-#FROM williamyeh/ansible:debian9-onbuild
-#FROM williamyeh/ansible:debian8-onbuild
-#FROM williamyeh/ansible:centos7-onbuild
-#FROM williamyeh/ansible:alpine3-onbuild
 
 
 # ==> Specify requirements filename;  default = "requirements.yml"
