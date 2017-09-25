@@ -4,7 +4,7 @@ Docker-Ansible base images
 
 ## Summary
 
-Originally cloned from **[William-Yeh/docker-ansible](https://github.com/William-Yeh/docker-ansible)**
+Originally forked from **[William-Yeh/docker-ansible](https://github.com/William-Yeh/docker-ansible)**
 
 This repository contains Dockerized [Ansible](https://github.com/ansible/ansible), published to the public [Docker Hub](https://hub.docker.com/) via **automated build** mechanism.
 
