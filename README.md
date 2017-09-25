@@ -34,13 +34,13 @@ Each version is further divided into two variants:
 
 - Normal variants:
 
-  - `mspanakis/ansible:ubuntu16.04`
-  - `mspanakis/ansible:ubuntu14.04`
+  - `mspanakis/docker-ansible:ubuntu16.04`
+  - `mspanakis/docker-ansible:ubuntu14.04`
 
 - Onbuild variants (*recommended for common cases*):
 
-  - `mspanakis/ansible:ubuntu16.04-onbuild`
-  - `mspanakis/ansible:ubuntu14.04-onbuild`
+  - `mspanakis/docker-ansible:ubuntu16.04-onbuild`
+  - `mspanakis/docker-ansible:ubuntu14.04-onbuild`
 
 
 ## For the impatient
