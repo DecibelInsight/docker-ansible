@@ -2,7 +2,7 @@ FROM python:2.7
 
 RUN mkdir /python && \
     useradd python -d /python && \
-    mkdir /python/.ssh && \
+    mkdir /python/{.ssh,.cache} && \
     chown -R python:python /python && \
     chmod -R 0700 /python && \
     wget https://storage.googleapis.com/git-repo-downloads/repo -O /usr/local/bin/repo && \
