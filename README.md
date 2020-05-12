@@ -2,6 +2,8 @@
 
 This Dockerfile is built to support Ansible Molecule testing for EC2 instances. This image is currently pegged to all of the requirements for Ansible Molecule v2.22, since integration of the EC2 driver for Molecule v3 is not yet finalized.
 
+[git-repo](https://gerrit.googlesource.com/git-repo/) has been added to the container for pulling in any dependencies required for proper Molecule testing to be conducted.
+
 The image is currently sourced from the Python v2.7 upstream image.
 
 ## Container Execution
