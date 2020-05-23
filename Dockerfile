@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:2.7-slim-buster
 
 ENV PACKER_VERSION 1.5.5
 
@@ -7,15 +7,20 @@ RUN mkdir /python && \
     mkdir /python/.ssh && \
     chown -R python:python /python && \
     chmod -R 0700 /python && \
-    wget https://storage.googleapis.com/git-repo-downloads/repo -O /usr/local/bin/repo && \
-    chmod 0755 /usr/local/bin/repo && \
-    pip install --no-cache-dir ansible==2.9.7 molecule[ec2]==2.22 docker sh==1.12.14 awscli==1.16.305 && \
     mkdir -p /packer && \
     chown -R python:python /packer && \
-    chmod -R 0700 /packer && \
-    wget -nc -q https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip -P /packer && \
+    chmod -R 0700 /packer
+
+ADD https://storage.googleapis.com/git-repo-downloads/repo /usr/local/bin/repo
+ADD https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip /packer/packer_${PACKER_VERSION}_linux_amd64.zip
+
+RUN chmod 0755 /usr/local/bin/repo && \
+    apt-get update && \
+    apt-get install -y gcc unzip  && \
+    rm -rf /var/lib/apt/lists/* && \
     unzip -q /packer/packer_${PACKER_VERSION}_linux_amd64.zip -d /packer && \
-    rm /packer/packer_${PACKER_VERSION}_linux_amd64.zip
+    rm /packer/packer_${PACKER_VERSION}_linux_amd64.zip && \
+    pip install --no-cache-dir ansible==2.9.7 molecule[ec2]==2.22 docker sh==1.12.14 awscli
 
 ENV PATH $PATH:/packer
 
