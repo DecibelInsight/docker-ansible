@@ -15,7 +15,7 @@ RUN mkdir /python && \
     wget https://releases.hashicorp.com/packer/${PACKER_VERSION}/packer_${PACKER_VERSION}_linux_amd64.zip -O /packer/packer_${PACKER_VERSION}_linux_amd64.zip && \
     unzip -q /packer/packer_${PACKER_VERSION}_linux_amd64.zip -d /packer && \
     rm /packer/packer_${PACKER_VERSION}_linux_amd64.zip && \
-    pip install --no-cache-dir ansible==2.9.7 molecule[ec2]==2.22 docker sh==1.12.14
+    pip install --no-cache-dir ansible==2.9.7 molecule[ec2]==2.22 docker sh==1.12.14 lxml
 
 ENV PATH $PATH:/packer
 
