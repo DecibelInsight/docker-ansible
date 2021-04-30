@@ -22,6 +22,6 @@ RUN mkdir /python && \
 	chmod +x /usr/bin/terraform && \
     wget -q https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O /usr/bin/terragrunt && \
 	chmod +x /usr/bin/terragrunt && \
-    pip install --no-cache-dir ansible==${ANSIBLE_VERSION} molecule[ec2]==2.22 docker sh==1.12.14 lxml
+    pip install --no-cache-dir ansible==${ANSIBLE_VERSION} molecule[ec2]==2.22 docker sh==1.12.14 lxml awscli
 
 USER python
