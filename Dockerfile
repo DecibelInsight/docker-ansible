@@ -1,9 +1,9 @@
 FROM python:2.7
 
-ENV ANSIBLE_VERSION 2.9.16
+ENV ANSIBLE_VERSION 2.9.19
 ENV PACKER_VERSION 1.7.0
-ENV TERRAFORM_VERSION 0.13.6
-ENV TERRAGRUNT_VERSION 0.26.7
+ENV TERRAFORM_VERSION 0.14.8
+ENV TERRAGRUNT_VERSION 0.28.12
 
 RUN mkdir /python && \
     useradd python -d /python && \
@@ -22,6 +22,6 @@ RUN mkdir /python && \
 	chmod +x /usr/bin/terraform && \
     wget -q https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O /usr/bin/terragrunt && \
 	chmod +x /usr/bin/terragrunt && \
-    pip install --no-cache-dir ansible==${ANSIBLE_VERSION} molecule[ec2]==2.22 docker sh==1.12.14 lxml
+    pip install --no-cache-dir ansible==${ANSIBLE_VERSION} molecule[ec2]==2.22 docker sh==1.12.14 lxml awscli
 
 USER python
